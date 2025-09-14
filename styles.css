@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap');
+
+/* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/* Light Mode Styling */
+body {
+    background-color: #f0f2f5;
+    color: #333333; /* Dark gray for good contrast on light glass */
+}
+
+/* Glassmorphism Effect for Light Mode */
+.glassmorphism-card {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.glass-progress-bg {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.note-card {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Dark Mode Styling */
+.dark body {
+    background-color: #0d1117;
+    color: #e0e0e0; /* Light gray for good contrast on dark glass */
+}
+
+/* Glassmorphism Effect for Dark Mode */
+.dark .glassmorphism-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.dark .glass-progress-bg {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dark .glowing-progress {
+    background: linear-gradient(90deg, #6a4c93, #a267ac, #d495d9);
+}
+
+.dark .glowing-progress::before {
+    background: #d495d9;
+}
+
+.dark .glass-text {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.dark .note-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Common Styles for Both Modes */
+
+.glassmorphism-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.25);
+}
+
+.header-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.header-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(162, 103, 172, 0.2) 0%, rgba(212, 149, 217, 0.05) 50%, transparent 70%);
+    animation: rotate 10s linear infinite;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Glowing Text */
+.glowing-text {
+    font-family: 'Roboto Mono', monospace;
+    text-shadow: 0 0 8px rgba(162, 103, 172, 0.8), 0 0 15px rgba(212, 149, 217, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* Glowing Progress Bar */
+.glowing-progress {
+    background: linear-gradient(90deg, #6a4c93, #a267ac, #d495d9);
+    position: relative;
+    overflow: hidden;
+}
+
+.glowing-progress::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #d495d9;
+    opacity: 0.8;
+    filter: blur(5px);
+    transform: scale(0);
+    animation: glowPulse 2s ease-in-out infinite;
+    transition: transform 0.5s ease;
+}
+
+@keyframes glowPulse {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+}
+
+/* Accordion */
+.accordion-item-header {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-item-header:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.accordion-item-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.accordion-item-body.expanded {
+    max-height: 500px; /* Adjust as needed */
+}
+
+/* Notes Section */
+.note-card {
+    border-radius: 10px;
+    padding: 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.note-buttons button {
+    transition: transform 0.2s ease;
+}
+
+.note-buttons button:hover {
+    transform: scale(1.1);
+}
+
+.glass-button {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Modal-specific styles for transitions */
+#custom-modal.show {
+  opacity: 1;
+}
+
+#custom-modal.show .glassmorphism-card {
+  transform: scale(1);
+}
+
+#modal-cancel, #modal-confirm {
+  color: inherit;
+}
+
+#modal-cancel.dark, #modal-confirm.dark {
+  color: inherit;
+}
+
+/* Small adjustments for specific elements for both modes */
+#current-time, #current-weekday {
+    color: #4a4a4a;
+}
+
+.dark #current-time, .dark #current-weekday {
+    color: #ffffff;
+}
+
+/* Update text color for tasks, notes, etc. using a descendant selector */
+.glassmorphism-card h2,
+.glassmorphism-card h3,
+.glassmorphism-card p,
+.glassmorphism-card .text-blue-500,
+.glassmorphism-card .text-red-500,
+.note-card p {
+    color: #4a4a4a;
+}
+
+.dark .glassmorphism-card h2,
+.dark .glassmorphism-card h3,
+.dark .glassmorphism-card p,
+.dark .note-card p {
+    color: #e0e0e0;
+}
+
+/* Special case for the lighter "time" text */
+#current-task-time,
+#previous-task-time,
+#next-task-time {
+    color: #666666;
+}
+
+.dark #current-task-time,
+.dark #previous-task-time,
+.dark #next-task-time {
+    color: #aaaaaa;
+}
+
+/* Adjustments for buttons and other elements */
+.dark #modal-cancel {
+    color: #e0e0e0;
+}
+
+.dark #modal-confirm {
+    color: #ffffff;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+    .header-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

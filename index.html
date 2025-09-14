@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Futuristic Timetable</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-gray-100 dark:bg-gray-900 font-sans p-4">
+    <div class="container mx-auto max-w-5xl">
+      <header
+        class="glassmorphism-card header-card p-6 flex flex-col sm:flex-row justify-between items-center mb-6"
+      >
+        <div class="text-3xl font-bold">My Timetable</div>
+        <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+          <div
+            id="current-time"
+            class="text-3xl font-mono glass-text glowing-text"
+          >
+            HH:MM:SS
+          </div>
+          <div id="current-weekday" class="text-xl glass-text">Weekday</div>
+        </div>
+      </header>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="col-span-1">
+          <section class="mb-6">
+            <div class="glassmorphism-card p-6">
+              <h2 class="text-2xl font-semibold mb-4">Current Task</h2>
+              <div id="current-task-info">
+                <p id="current-task-name" class="text-xl font-bold mb-2">
+                  No current task
+                </p>
+                <p id="current-task-time" class="text-sm">
+                  --:-- to --:--
+                </p>
+              </div>
+              <div class="relative w-full h-2 mt-4 glass-progress-bg rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full rounded-full transition-all duration-1000 ease-linear glowing-progress"></div>
+              </div>
+            </div>
+          </section>
+          <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div class="glassmorphism-card p-6 relative overflow-hidden">
+              <h3 class="text-xl font-semibold mb-2">Previous Task</h3>
+              <div id="previous-task-info">
+                <p id="previous-task-name" class="font-medium">No previous task</p>
+                <p id="previous-task-time" class="text-sm">
+                  --:-- to --:--
+                </p>
+              </div>
+              <button id="show-completed-btn" class="mt-4 text-blue-500 font-semibold text-sm">
+                See More
+              </button>
+              <div id="completed-tasks-list" class="hidden mt-4 overflow-y-auto max-h-48"></div>
+            </div>
+
+            <div class="glassmorphism-card p-6 relative overflow-hidden">
+              <h3 class="text-xl font-semibold mb-2">Next Task</h3>
+              <div id="next-task-info">
+                <p id="next-task-name" class="font-medium">No next task</p>
+                <p id="next-task-time" class="text-sm">
+                  --:-- to --:--
+                </p>
+              </div>
+              <button id="show-remaining-btn" class="mt-4 text-blue-500 font-semibold text-sm">
+                See More
+              </button>
+              <div id="remaining-tasks-list" class="hidden mt-4 overflow-y-auto max-h-48"></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="col-span-1">
+          <section class="mb-6">
+            <div class="glassmorphism-card p-6">
+              <h2 class="text-2xl font-semibold mb-4">Weekly Timetable</h2>
+              <div id="timetable-accordion"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section>
+        <div class="glassmorphism-card p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-semibold">Notes</h2>
+            <button id="add-note-btn" class="glass-button text-white font-semibold py-2 px-4 rounded-full shadow-lg transition-transform hover:scale-105">
+              Add Note
+            </button>
+          </div>
+          <div id="notes-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+        </div>
+      </section>
+    </div>
+
+    <div id="custom-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm z-50 hidden transition-opacity duration-300 opacity-0">
+      <div class="glassmorphism-card p-6 w-11/12 max-w-md scale-95 transition-transform duration-300">
+        <h3 id="modal-title" class="text-xl font-bold mb-4"></h3>
+        <p id="modal-message" class="mb-4"></p>
+        <input type="text" id="modal-input" class="w-full p-2 rounded-lg bg-white bg-opacity-30 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-purple-300 dark:bg-gray-800 dark:bg-opacity-30 dark:border-gray-700 mb-4 hidden" />
+        <div class="flex justify-end space-x-2">
+          <button id="modal-cancel" class="py-2 px-4 rounded-lg bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 transition-colors">
+            Cancel
+          </button>
+          <button id="modal-confirm" class="py-2 px-4 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition-colors">
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <script src="app.js"></script>
+    <script>
+      // Simple script to handle dark mode based on system preference
+      const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+  </body>
+</html>
